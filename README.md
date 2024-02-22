@@ -56,55 +56,6 @@ This is a more elaborate environment with transparent walls and a pushable box:
 
 ![FlatWorld environment](./img/FlatWorldInteractiveExample2.png)
 
-## Default Actions
-
-When the `actuator_type` parameter passed to `FlatWorldEnvironment` is the default (`ActuatorType.DEFAULT`)
-the actions provided by the environment will be one of:
-
-- NONE (0)
-- LEFT (1)
-- RIGHT (2)
-- FORWARD (3)
-- BACK (4)
-- TOGGLE (5) - Toggles color of agent
-
-## Booster Actions
-
-Booster-like actions are supported by passing an `actuator_type` parameter
-equal to `ActuatorType.BOOSTERS_2` (2 boosters) or `ActuatorType.BOOSTERS_4` (4 boosters).
-
-The action vector provided to the environment will have a length equal
-to the number of boosters. Each value (or booster power) of the vector 
-must be between -1 and +1.
-
-The first two boosters (0 and 1) are located on the left and 
-right sides of the agent, respectively. If booster power is positive, 
-the booster fires upward. If power is negative,
-the booster fires downward.
-
-Boosters 2 and 3 are located on the tail and head of the agent,
-respectively. If booster power is positive, these boosters 
-fire in a rightward direction. If power is negative, they 
-fire in a leftward direction. Boosters 2 and 3 allow 
-the agent to move sideways without turning.
-
-When a booster fires, it creates both angular and linear 
-acceleration. This acceleration only has an effect for
-a certain number of steps, due to friction.
-
-## Dual Actuator
-
-Actions that behave similar to those of the 
-Animal AI testbed can be simulated by passing
-an `actuator_type` parameter to the environment constructor
-with a value of `ActuatorType.DUAL`.
-
-The action vector provided to the environment should
-have two values. The first value selects from Forward
-and Back. The second value selects from Right and Left. 
-Each value can be 0 (no action), 1 (Forward/Right) or 
-2 (Back/Left).
-
 ## Types of elements
 
 Custom elements can be defined. The following are the standard pre-defined elements:
@@ -116,19 +67,6 @@ Custom elements can be defined. The following are the standard pre-defined eleme
 - Translucent (`FlatWorldElement.translucent_brick`) - It's solid. The agent can see through it.
 - Box (`FlatWorldElement.box`) - A box is a tool that can be pushed by the agent. Moving a box into a fence or wall brick destroys the brick. Moving a box into a blue food turns it into a green food. A box can also displace yellow and green foods.
 - Wall (`FlatWorldElement.wall_brick`) - A solid opaque brick.
-
-## Episodes
-
-Episodes end when the agent consumes a green food, blue food, hits a fence,
-or is eaten by a predator.
-An episode also ends if the cumulative reward of the agent reaches -1 (by default).
-
-With every step the agent is awarded -0.01 rewards, unless
-a `default_reward` parameter is passed to the constructor
-of the environment.
-
-To change the cumulative reward lower bound, override the `get_min_cumulative_reward`
-method of `FlatWorldConfig`.
 
 ## Observation
 
@@ -146,6 +84,19 @@ grid cells, as follows:
 In multi-agent mode, the observation is batched, so its
 shape will be Bx4x20 by default. `B` cannot be 1 unless
 the `squeeze` parameter is set to `False`.
+
+## Episodes
+
+Episodes end when the agent consumes a green food, blue food, hits a fence,
+or is eaten by a predator.
+An episode also ends if the cumulative reward of the agent reaches -1 (by default).
+
+With every step the agent is awarded -0.01 rewards, unless
+a `default_reward` parameter is passed to the constructor
+of the environment.
+
+To change the cumulative reward lower bound, override the `get_min_cumulative_reward`
+method of `FlatWorldConfig`.
 
 ## Info
 
@@ -262,6 +213,55 @@ gym environment behavior.  You can, however,
 force batching behavior with a single agent
 by passing an `squeeze=False` parameter 
 to the environment constructor.
+
+## Default Actions
+
+When the `actuator_type` parameter passed to `FlatWorldEnvironment` is the default (`ActuatorType.DEFAULT`)
+the actions provided by the environment will be one of:
+
+- NONE (0)
+- LEFT (1)
+- RIGHT (2)
+- FORWARD (3)
+- BACK (4)
+- TOGGLE (5) - Toggles color of agent
+
+## Booster Actions
+
+Booster-like actions are supported by passing an `actuator_type` parameter
+equal to `ActuatorType.BOOSTERS_2` (2 boosters) or `ActuatorType.BOOSTERS_4` (4 boosters).
+
+The action vector provided to the environment will have a length equal
+to the number of boosters. Each value (or booster power) of the vector 
+must be between -1 and +1.
+
+The first two boosters (0 and 1) are located on the left and 
+right sides of the agent, respectively. If booster power is positive, 
+the booster fires upward. If power is negative,
+the booster fires downward.
+
+Boosters 2 and 3 are located on the tail and head of the agent,
+respectively. If booster power is positive, these boosters 
+fire in a rightward direction. If power is negative, they 
+fire in a leftward direction. Boosters 2 and 3 allow 
+the agent to move sideways without turning.
+
+When a booster fires, it creates both angular and linear 
+acceleration. This acceleration only has an effect for
+a certain number of steps, due to friction.
+
+## Dual Actuator
+
+Actions that behave similar to those of the 
+Animal AI testbed can be simulated by passing
+an `actuator_type` parameter to the environment constructor
+with a value of `ActuatorType.DUAL`.
+
+The action vector provided to the environment should
+have two values. The first value selects from Forward
+and Back. The second value selects from Right and Left. 
+Each value can be 0 (no action), 1 (Forward/Right) or 
+2 (Back/Left).
 
 ## Predators
 
