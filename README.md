@@ -48,9 +48,13 @@ Use code similar to this:
 There is also a script in `tools/try_environment.py` for single-agent configurations
 and in `toosl/try_multiagent_env.py` for multi-agent configurations.
 
-This is what the interactive interface looks like:
+This is what the interactive interface looks like when rendering a simple environment that consists of a green food and a yellow food:
 
 ![FlatWorld environment](./img/FlatWorldInteractiveExample1.png)
+
+This is a more elaborate environment with transparent walls and a pushable box:
+
+![FlatWorld environment](./img/FlatWorldInteractiveExample2.png)
 
 ## Default Actions
 
