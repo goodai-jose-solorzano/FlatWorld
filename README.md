@@ -19,7 +19,7 @@ consists of four channels: three for color information and one for depth.
 
 The argument passed to the `FlatWorldEnvironment` constructor is an instance of a class
 that extends `FlatWorldConfig` or `FlatWorldMultiAgentConfig`. Multiple examples can
-be found in the `flat_world/tasks` folder.
+be found in the `flat_world/tasks` and `config_examples` folders.
 
 ## Running the environment interactively
 
